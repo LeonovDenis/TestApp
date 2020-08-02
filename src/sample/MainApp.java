@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import sample.model.Message;
 
 import java.io.IOException;
 
@@ -20,11 +21,16 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private Parent root;
     private Controller controller;
+    private volatile boolean stop=true;
 
+    //Один видеокадр
+    private ObservableList<Message> messageObsList = FXCollections.observableArrayList();
     //Один видеокадр
     private ObservableList<Short> video = FXCollections.observableArrayList();
     //Массив кадров
-    private ObservableMap<Number, ObservableList<Short>> stack = FXCollections.observableHashMap();
+    private ObservableList<ObservableList<Short>> videoMap=FXCollections.observableArrayList();
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -113,11 +119,27 @@ public class MainApp extends Application {
         this.video = video;
     }
 
-    public ObservableMap<Number, ObservableList<Short>> getStack() {
-        return stack;
+    public ObservableList<ObservableList<Short>> getVideoMap() {
+        return videoMap;
     }
 
-    public void setStack(ObservableMap<Number, ObservableList<Short>> stack) {
-        this.stack = stack;
+    public void setVideoMap(ObservableList<ObservableList<Short>> videoMap) {
+        this.videoMap = videoMap;
+    }
+
+    public ObservableList<Message> getMessageObsList() {
+        return messageObsList;
+    }
+
+    public void setMessageObsList(ObservableList<Message> messageObsList) {
+        this.messageObsList = messageObsList;
+    }
+
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
     }
 }
