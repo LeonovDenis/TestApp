@@ -73,6 +73,7 @@
                                         <NumberAxis side="LEFT" />
                                       </yAxis>
                                     </LineChart>
+                                    <Pane fx:id="ch" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" />
                                  </children></AnchorPane>
                               <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="1598.0" />
                           </items>

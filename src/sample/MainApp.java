@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.javafx.collections.ObservableMapWrapper;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -10,9 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.CategoryDataset;
+import sample.model.Chart;
 import sample.model.Message;
+import sample.model.interaction.ChartViewer;
 
 import java.io.IOException;
 
@@ -62,6 +68,20 @@ public class MainApp extends Application {
 
             controller = loader.getController();
             controller.setMainApp(this);
+            Object ch =(Pane) ((ObservableMapWrapper) (loader.getNamespace())).get("ch");
+            System.out.println("f"+ch);
+
+            Chart h=new Chart();
+                CategoryDataset dataset = h.createDataset();
+                JFreeChart chart = createChart(dataset);
+                ChartViewer viewer = new ChartViewer(chart);
+                viewer.addChartMouseListener(this);
+                stage.setScene(new Scene(viewer));
+                stage.setTitle("JFreeChart: BarChartFXDemo1.java");
+                stage.setWidth(700);
+                stage.setHeight(390);
+                stage.show();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
